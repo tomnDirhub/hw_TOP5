@@ -18,7 +18,7 @@ int main()
 	srand(time(NULL));
 
 	int side;
-	cout << "Ââåäèòå êîëè÷åñòâî äëèíó ñòîğîíû ìàòğèöû:\n";
+	cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ ÃªÃ®Ã«Ã¨Ã·Ã¥Ã±Ã²Ã¢Ã® Ã¤Ã«Ã¨Ã­Ã³ Ã±Ã²Ã®Ã°Ã®Ã­Ã» Ã¬Ã Ã²Ã°Ã¨Ã¶Ã»:\n";
 	cin >> side;
 	int** start_mat = new int*[side];
 	for (int i = 0; i < side; i++)
@@ -30,7 +30,7 @@ int main()
 		}
 	}
 
-	cout << "Íà÷àëüíàÿ ìàòğèöà:\n";
+	cout << "ÃÃ Ã·Ã Ã«Ã¼Ã­Ã Ã¿ Ã¬Ã Ã²Ã°Ã¨Ã¶Ã :\n";
 	for (int i = 0; i < side; i++)
 	{
 		for (int j = 0; j < side; j++)
@@ -55,7 +55,7 @@ int main()
 			res_mat[i][j] = start_mat[j][i];
 		}
 	}
-	cout << "Ïîëó÷åííàÿ ìàòğèöà:\n";
+	cout << "ÃÃ®Ã«Ã³Ã·Ã¥Ã­Ã­Ã Ã¿ Ã¬Ã Ã²Ã°Ã¨Ã¶Ã :\n";
 	for (int i = 0; i < side; i++)
 	{
 		for (int j = 0; j < side; j++)
