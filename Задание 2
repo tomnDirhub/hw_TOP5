@@ -1,0 +1,178 @@
+#include <iostream>
+#include <fstream>
+#include <windows.h>
+#include <time.h>
+#include <string>
+#include <string.h>
+#include <cstring>
+#include <stdio.h>
+#include <vector>
+
+using namespace std;
+
+void name_search(string*& names, string*& numbers, int start)
+{
+	string enter_num;
+	cout << "Введите номер контакта, который хотите найти:\n";
+	cin >> enter_num;
+
+	string result_name;
+	for (int i = 0; i < start; i++)
+	{
+		if (enter_num == numbers[i])
+			result_name = names[i];
+	}
+	cout << endl << result_name << " - " << enter_num;
+}
+
+void number_search(string*& names, string*& numbers, int start)
+{
+	string enter_name;
+	cout << "Введите номер контакта, который хотите найти:\n";
+	cin >> enter_name;
+
+	string result_number;
+	for (int i = 0; i < start; i++)
+	{
+		if (enter_name == names[i])
+			result_number = numbers[i];
+	}
+	cout << endl << enter_name << " - " << result_number;
+}
+
+void add_contact(string names[], string numbers[], int start)
+{
+	string new_name, new_number;
+	string* temp_names = new string[start];
+	string* temp_numbers = new string[start];
+
+	for (int i = 0; i < start; i++)
+	{
+		temp_names[i] = names[i];
+		temp_numbers[i] = numbers[i];
+	}
+
+	cout << "Введите имя нового контакта:\n";
+	cin >> temp_names[start + 1];
+
+	cout << "Введите номер телефона нового контакта:\n";
+	cin >> temp_numbers[start + 1];
+
+	for (int i = 0; i < start + 1; i++)
+	{
+		cout << temp_names[i] << " - " << temp_numbers[i] << endl;
+	}
+	delete[] temp_names;
+	delete[] temp_numbers;
+}
+
+void remove_contact(string*& names, string*& numbers, int start)
+{
+	int contact_del;
+	string* temp_names = new string[start - 1];
+	string* temp_numbers = new string[start - 1];
+
+	cout << "Введите номер контакта который хотите удалить:\n";
+	cin >> contact_del;
+
+	for (int i = 0; i < start - 1; i++)
+	{
+		if (i != contact_del - 1)
+		{
+			temp_names[i] = names[i];
+			temp_numbers[i] = numbers[i];
+		}
+	}
+
+	delete[] names;
+	delete[] numbers;
+
+	names = new string[start - 1];
+	numbers = new string[start - 1];
+
+	for (int i = 0; i < start - 1; i++)
+	{
+		names[i] = temp_names[i];
+		numbers[i] = temp_numbers[i];
+	}
+
+	delete[] temp_names;
+	delete[] temp_numbers;
+
+	for (int i = 0; i < start; i++)
+	{
+		cout << names[i] << " - " << numbers[i] << endl;
+	}
+}
+
+int main()
+{
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+	srand(time(NULL));
+
+	int start_cnt;
+	int operation;
+	cout << "Введите начальное количество контаков:\n";
+	cin >> start_cnt;
+	string* names = new string[start_cnt];
+	string* numbers = new string[start_cnt];
+	
+	for (int i = 0; i < start_cnt; i++)
+	{
+		cout << "Добавьте имя контакта:\n";
+		cin >> names[i]; cout << endl;
+		cout << "Добавьте номер контакта:\n";
+		cin >> numbers[i]; cout << endl;
+	}
+
+	for (int i = 0; i < start_cnt; i++)
+	{
+		cout << names[i] << " - " << numbers[i] << endl;
+	}
+	cout << endl;
+	do 
+	{
+		cout << "Выберите один номер пункта из предложенных:\n"
+			<< "1. Поиск по номеру телефона" << endl
+			<< "2. Поиск по имени" << endl
+			<< "3. Добавить новый контакт" << endl
+			<< "4. Удалить существующий контакт" << endl
+			<< "5. Завершить программу" << endl;
+		cin >> operation;
+		
+		switch (operation)
+		{
+			case(1):
+			{
+				name_search(names, numbers, start_cnt);
+				cout << endl << endl;
+				break; 
+			}
+			case(2):
+			{
+				number_search(names, numbers, start_cnt);
+				cout << endl << endl;
+				break;
+			}
+			case(3):
+			{
+				add_contact(names, numbers, start_cnt);
+				cout << endl << endl;
+				break;
+			}
+			case(4):
+			{
+				remove_contact(names, numbers, start_cnt);
+				cout << endl << endl;
+				break;
+			}
+			case(5):
+			{
+				break;
+			}
+		}
+	} while (operation != 5);
+	delete[] names;
+	delete[] numbers;
+}
